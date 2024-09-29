@@ -1,0 +1,325 @@
+1. SQL 👍
+ * sql is the strature quary language 
+ * it used the store ,manipulate ,retrive data from RDMS.
+ * it is not a database it is a language used to interact with database.
+
+ we also use the curd operation in sql 
+  * Create
+  * Read
+  * Update
+  * Delete
+
+No-SQL: not only sql.
+
+2. what are the diffrent type of sql command?
+
+  *There are 5 type type of command are there.
+  1.DDL:  data  defination language =>Create,Drop,Alter,Rename,Truncate
+  2.DCL:  data control language =>Grant,Revoke
+  3.DML:  data maipulate language =>Insert,Update,Delete
+  4.DQL:  data quary language => SELECT
+  5.TCL:  Transaction control language =>Commit,Rollback,Start Transaction,Savepoint
+
+
+
+3.primary key:
+
+   *primary key is the constrint uniquely identifies each record in a table
+   *it is not null.
+   *unique + not null + no duplicates.
+   *a table have one primary key also.
+    
+    create table student(
+        id int not null,
+        primary key(id)
+    );
+
+
+
+4.Foreign Key:
+
+   *A Foreign key is a column or set of column in a table that refers primary key.
+   *There can be multipal Foreign key.
+   *Suppose i have a two table when one table primary key also refers to another table column that also Foreign key.
+    
+    create table student(
+        course_id int,
+        Foreign key(course_id) refers teacher(id)
+    )
+
+
+
+super key:
+   * A super key is a combination of all possible attribute which can uniquely identifies two tuple in a table.
+   * super key=candiate key(c.k)+any attribute.
+
+   Ex:
+     suppose i have student table have rollno,name,age attribute there
+     *candiate key is rollno
+     *rollno+name=super key
+      rollno+age=super key
+      rollno+name+age=super key
+
+
+5.what is different between CHAR and VARCHAR?
+
+=> char: 
+    *CHAR stands for “Character”.
+    *CHAR datatype is used to store character strings of fixed length.
+    *CHAR takes 1 byte for each character.
+    *Better performance than VARCHAR.
+
+=> varchar:
+    *VARCHAR stands for “Variable Character”.
+    *VARCHAR datatype is used to store character strings of variable length.
+    *VARCHAR takes 1 byte for each character and some extra bytes for holding length information.
+    *Performance is not good as compared to CHAR.
+
+    craete table student(
+        rollno int primary key,
+        name varchar(50)
+    );
+
+
+6.what is the join?
+  *Join is used to combine rows from two or more table.
+  *Based on related column between them.
+  
+  There are 4 type of join are there
+  1. Inner join
+  2. Left join (outer join)
+  3. Right join(outer join)
+  4. Full join (outer join)
+
+  inner join :
+    *return records that have matching value both table
+    *
+      SELECT  column from tableA
+      inner join tableB
+      on tableA.col_name=tableB.col_name;
+
+  left join :
+    *return all record from the left table 
+    *and match record from the right table
+
+    SELECT column
+    from tableA
+    left join tableB
+    on tableA.col_name=tableB.col_name;
+
+  Right join
+    *return all record from right table
+    *and match the record from left table
+
+    SELECT column
+    from tableA
+    right join tableB
+    on tableA.col_name=tableB.col_name;
+
+  Full Join;
+    *return all the record is a match in either left or right table
+
+    left join
+    union
+    right join
+
+
+    SELECT*from student as a
+    left join course as b
+    on a.id=b.id
+    union
+    SELECT*from student as a
+    right join course as b
+    on a.id=b.id;
+
+
+7.what is subquary?
+  * A subquary or inner quary or nested quary within  another sql quary.
+  * There are two types of subquary are there-
+
+     1.Nested subquary
+     2.Correlated subquary
+
+  Nested subquary:
+     *inner quary runs first, and only one outer quary executed with result that is called Nested quary.
+     *Its is also Bottom up Aproch.
+     *in ,not in, equal use
+     *
+       select * 
+       from table
+       where salary=select max(salary);
+
+
+  Correlated subquary:
+    *outer quary execution first.
+    *and every outer quary row inner quary executed.
+    *it is also top down approch.
+    *exist,not exist 
+
+   SELECT column
+   From tablename
+   where col_name
+   (subquary);
+
+------------------------------------------------
+8.what are indexes?
+
+  * index is a quick lookup table for finding records which  we can search.
+
+   CREATE INDEX index_name
+   ON table_name (column1, column2, ...);
+
+
+9. what is normalization?
+------------------------------------------------
+ *Normalization is the normal form of process and  eliminate data redundancy 
+  and enhance data integrity in the table.
+
+  there are 4 type of normalization are there
+  1.1NF
+  2.2NF
+  3.3NF
+  4.BCNF(2.5NF)
+
+
+10.ACID
+-----------------------------------------------------------------
+
+ACID is  4 key properties that define a transaction:
+  A->Atomicity, 
+  c->Consistency, 
+  i->Isolation,
+  d->Durability
+
+*Atomicity: either all or none means suppose i have craete transaction 
+        before commit the transaction will be failure and go to the start of the transaction that called also rollback it also called the Atomicity.
+        
+        T1 -------
+        R(A)      |
+        A=A+50    |
+        W(A)      |
+        R(A)  ----
+        //Commit
+
+
+*Consistency:
+     before transaction and after transaction the total sum will be same that also called Consistency.
+
+     suppose A send the money B 1000
+     A->B 
+     A have -> 2000
+     B have -> 3000
+
+       T1
+   -----------
+      R(A)
+      A=A-1000;
+      R(A) ->1000 (stored in the local memory)
+      R(B)
+      B=B+1000
+      W(B) -> 4000
+      //commit
+
+      so,before transaction and after transaction the total money should be same.
+
+  
+*Isolation :
+  *multipal transaction when woork paralel that called Isolation.
+
+   t1  | t2 |  t3 |
+  -------------------------
+       |    |     |
+       |    |     |
+       |    |     |
+
+*Durability:
+  *its means all transaction will be parmanent save in the database that called Durability.
+
+
+11.Transaction?
+ *A transaction is a sequence of SQL statements thatare executed as a single logical unit of work. 
+ Itensures data consistency and integrity by eithercommitting all changes or rolling them back if anerror occurs.
+
+
+  1.Active
+  2.partial commited
+  3.commited
+  4.faild
+  5.Abort
+
+ 
+ what is difference between union and union all in sql
+
+ *The main difference between UNION and UNION ALL is that: 
+  UNION: only keeps unique records. 
+  UNION ALL: keeps all records, including duplicates.
+
+
+
+what is dead Lock Transaction?
+=>
+  when two or more transactionsare waiting for each other to release resources,resulting in a circular dependency. 
+  As a result, none of the transactions can proceed, and the system lock create that also called deadlock.
+
+
+
+view:
+  *view is bescially virtual table not real table.
+  *view is the result of stored quary.
+  *Read only and update view.
+  *Matalized View: its means that suppose a remote server is running our project that also called Matalized view.
+
+
+  *create view v1 as select id 
+   from student;
+  
+  *advantage:
+    *to restrict databse.
+    *to make complex quary easy.
+
+
+
+Where vs Having ?
+
+*Where
+   *Group by clause
+   *Not use Aggreation function
+   *Select,update,Delete use
+   *used filter data in a table specied condision.
+   *Used single function like-asc,des,upper,lower
+
+
+Having
+   *Cannot use Group By clause
+   *Use Aggreation function
+   *Select only use
+   *used files data in a table Group By condision.
+   *multipal function used like-max(),min(),avg(),count()
+
+
+DELETE:   Removes rows from a table and can be rolled back.
+TRUNCATE: Removes all rows from a table but does not log individual row deletions, faster than DELETE.
+DROP:     Deletes the table structure and its data permanently.
+
+
+clustered index:
+   * a clustered index determines the physical order of data in a table.
+   * a table can have only one clustered index.
+   * it change the way data is sorted on disk and can created only one coloum.
+
+non clustered index:
+   * does not affect the physical order of a table.
+   * a table can have multipal non-clustered index.
+   * its store separetly contains a pointer actual data.
+
+ Grant:
+  *the Grant statement is used to grant specific permission,
+   or privileges to user roles in a database.
+
+
+How do you handle NULL values in SQL?
+  *NULL values represent missing or unknown data. 
+   You can handle NULL values using IS NULL,
+   IS NOT NULL, and functions like COALESCE() or IFNULL().
+
+

@@ -1,0 +1,104 @@
+1.what is the order of execution in sql?
+ (fwghsol)
+ FROM -> where -> Group by -> having -> select -> order By -> Limit
+
+ *from-> choose the table 
+ *where-> filter the data
+ *group by-> Aggregates the data
+ *having-> filter the Aggregates data
+ *select-> return final data
+ *order by-> sort the final data
+ *limit-> return data row count
+
+# sql vs Mysql
+ Sql:
+    *sql is strature quary language
+    *it used to craete,read,update,Delete that data also
+    
+  Mysql:
+    *My sql is a RDMS
+    *Mysql is also used sql.
+
+#There are 5 type type of command are there.
+  1.DQL:  data quary language => SELECT
+  2.DDL:  data  defination language =>Create,Drop,Alter,Rename,Truncate
+  3.DML: data maipulate language =>Insert,Update,Delete
+  4.DCL:  data control language =>Grant,Revoke
+  5.TCL:  Transaction control language =>Commit,Rollback,Start Transaction,Savepoint
+
+DDL:
+  *data defination language.
+  *it is a subset of sql.
+
+Create:
+  *it besically used to new table create.
+  *craete table tablename
+
+Alter:
+  *used to modify our table.
+  *we are add ,drop , constrint used in alter also.
+
+  *Alter Table student 
+   Add column email varchar(50);
+
+Drop:
+  *used to delete and starture the table.
+  *
+    Drop table student;
+
+create index:
+  *used to craete one and more column of a table
+  *its besically used for faster data retrive.
+
+drop index:
+  *used to remove existing index from table
+
+truncate:
+  *delete the data inside the table but not delete table.
+
+select:
+  *select the data from database.
+
+where:
+  *used to filter the record in table.
+   there are many operator used - max,min,avg,sum
+
+distinct:
+  *remove duplicates row in a table Unique value given
+
+like:
+  *the like operator used to serch special pattern of a coloum.
+
+in:
+  *filter the result using where clause
+
+between:
+  *filter the record specified range using where clause
+
+is null:
+  *chake null value in where clause
+
+As:
+  *rename the coloum
+
+Order By;
+ *order by clause used to sort the result
+ *asending(asc) and desinding(desc)
+
+group By:
+  *group row a table one or more coloum
+  *its bescially used for aggregate function sum,avg,count
+
+Aggregates function:
+ *a function that performs a calculation on a set of values,
+  and returns a single value
+
+ ex: max(),avg(),min()
+
+ Grant:
+  *the Grant statement is used to grant specific permission 
+   or privileges to user roles in a database.
+
+
+
+
